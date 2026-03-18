@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package kvstore;
+
+// KeyValueStore — in-memory хранилище ключ–значение с TTL и LRU eviction.
+// Контракт менять нельзя. Реализуйте серверную часть.
+service KeyValueStore {
+  // Put: добавить или обновить значение. ttl_seconds = 0 означает отсутствие TTL.
+  rpc Put(PutRequest) returns (PutResponse);
+  // Get: получить значение по ключу. NOT_FOUND — если ключ отсутствует или TTL истёк.
+  rpc Get(GetRequest) returns (GetResponse);
+  // Delete: удалить ключ.
+  rpc Delete(DeleteRequest) returns (DeleteResponse);
+  // List: вернуть все ключи и значения с данным prefix. Истёкшие по TTL не возвращать.
+  rpc List(ListRequest) returns (ListResponse);
+}
+
+message ListRequest {
+  string prefix = 1;
+}
+
+message GetRequest {
+  string key = 1;
+}
+
+message PutRequest {
+  string key = 1;
+  string value = 2;
+  int32 ttl_seconds = 3;  // 0 = без TTL
+}
+
+message DeleteRequest {
+  string key = 1;
+}
+
+
+
+message ListResponse {
+  repeated KeyValue items = 1;
+}
+
+message GetResponse {
+  string value = 1;
+}
+
+message PutResponse {}
+
+message DeleteResponse {}
+
+message KeyValue {
+  string key = 1;
+  string value = 2;
+}
+
+
+
+
+
+
