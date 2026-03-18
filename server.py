@@ -55,6 +55,7 @@ class KeyValueStoreServicer(pb2_grpc.KeyValueStoreServicer):
             del self.storage[
                 min(self.storage, key=lambda key: self.storage[key]["last_used"])
             ]
+
         return pb2.PutResponse()
 
     def Delete(
