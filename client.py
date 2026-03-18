@@ -6,7 +6,7 @@ import time
 
 def run_tests():
     # Подключаемся к серверу
-    channel = grpc.insecure_channel("localhost:50051")
+    channel = grpc.insecure_channel("localhost:8000")
     stub = pb2_grpc.KeyValueStoreStub(channel)
 
     print("=== Тест 1: Put и Get ===")
@@ -84,7 +84,7 @@ def run_tests():
 
 def interactive_mode():
     """Интерактивный режим для ручного тестирования"""
-    channel = grpc.insecure_channel("localhost:50051")
+    channel = grpc.insecure_channel("localhost:8000")
     stub = pb2_grpc.KeyValueStoreStub(channel)
 
     print("\n=== Интерактивный режим ===")
