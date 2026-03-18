@@ -1,6 +1,4 @@
-def main():
-    print("Hello from itk-grpc!")
-
+from server import serve
 
 if __name__ == "__main__":
-    main()
+    serve()
